@@ -1,37 +1,43 @@
 # PBR Material Dump Tool
 
-CSharp program for converting PBR materials into dump files.
+A CScharp program for converting PBR (Physically Based Rendering) materials into optimized dump files for faster loading in Vulkan rendering environments.
 
 ## Quick Start
 
-```
+To quickly start the conversion process, run the following command in your terminal or command prompt:
+
+```bash
 START MaterialDumpTool.exe --dir PATH_TO_WORKSPACE
 ```
 
+Where `PATH_TO_WORKSPACE` is the directory containing the PBR materials to be converted.
+
 ## Backstory
 
-Large PBR materials with a resolution of 2024x2024 have longer loading times for Vulkan rendering than small dump files.
+Rendering large PBR materials (e.g., 2024x2024 resolution) can result in slower load times in Vulkan applications. To alleviate this, the PBR Material Dump Tool converts these large assets into smaller dump files, optimizing them for quicker rendering.
 
 ## Software Architecture
+
+The application follows a structured conversion pipeline for transforming high-resolution PBR materials into various downscaled sizes for performance optimization.
 
 ![Software-Architecture](/doc/software-architecture.svg)
 
 ## Prerequisites
 
-Download PBR materials for conversion.
+Before using the tool, download the required PBR materials for conversion.
 
-|Name|Example|
-|-|-|
-|albedo|`pbrmat1_albedo.png`|
-|ao|`pbrmat1_ao.png`|
-|height|`pbrmat1_height.png`|
-|normal-ogl|`pbrmat1_normal-ogl.png`|
-|preview|`pbrmat1_preview.png`|
-|roughness|`pbrmat1_roughness.png`|
+| **Material Name** | **Example Filename**          |
+|-------------------|-------------------------------|
+| Albedo            | `pbrmat1_albedo.png`          |
+| Ambient Occlusion  | `pbrmat1_ao.png`              |
+| Height            | `pbrmat1_height.png`          |
+| Normal (OpenGL)    | `pbrmat1_normal-ogl.png`      |
+| Preview           | `pbrmat1_preview.png`         |
+| Roughness         | `pbrmat1_roughness.png`       |
 
 ## Getting Started
 
-Place a list of PBR materials in the workspace.
+Ensure you have placed the list of PBR materials inside your workspace directory. The initial structure should look like this:
 
 ### Initial Folder Structure
 
@@ -43,17 +49,24 @@ Place a list of PBR materials in the workspace.
 │   ├── pbrmat1_normal-ogl.png
 │   ├── pbrmat1_preview.png
 │   └── pbrmat1_roughness.png
-├── ...
+├── pbrmat2
+│   └── ...
 ├── pbrmatN
 ```
 
-### Start File Conversion
+### Start the Conversion Process
 
-```
+To begin converting the PBR materials into optimized dump files, run:
+
+```bash
 START MaterialDumpTool.exe --dir PATH_TO_WORKSPACE
 ```
 
-### Folder Structure With Converted Files
+Where `PATH_TO_WORKSPACE` is the directory where your PBR materials are stored.
+
+### Folder Structure After Conversion
+
+After running the conversion tool, you should see a `_dump` directory with downscaled versions of the original PBR materials at various resolutions:
 
 ```
 ├── _dump
@@ -65,29 +78,31 @@ START MaterialDumpTool.exe --dir PATH_TO_WORKSPACE
 │           ├── pbrmat1_metallic.png
 │           ├── pbrmat1_normal-ogl.png
 │           └── pbrmat1_roughness.png
-│        ├── 16x16
-│           ├── ...
-│        ├── 32x32
-│           ├── ...
-│        ├── 64x64
-│           ├── ...
-│        ├── 128x128
-│           ├── ...
-│        ├── 256x256
-│           ├── ...
-│        ├── 1024x1024
-│           ├── ...
-│        ├── 2024x2024
-│           ├── ...
-│   └── ...
+│       ├── 16x16
+│           └── ...
+│       ├── 32x32
+│           └── ...
+│       ├── 64x64
+│           └── ...
+│       ├── 128x128
+│           └── ...
+│       ├── 256x256
+│           └── ...
+│       ├── 1024x1024
+│           └── ...
+│       ├── 2024x2024
+│           └── ...
 │   └── pbrmatN
 ```
 
-## Source-Examples for PBR-Materials
+## Example Sources for PBR Materials
 
-- https://www.texturecan.com/
+You can download PBR material examples from websites like:
+
+- [TextureCan](https://www.texturecan.com/)
 
 ## Open Issues
 
-- [ ] The naming conventions for ambient, occlusion, albedo and metallic roughness files are inconsistent.
-- [ ] Single file too large. Should be split into separate files.
+- [ ] Inconsistent naming conventions for ambient occlusion, albedo, and metallic roughness files.
+- [ ] Large files should be split into smaller chunks for better handling and processing.
+
