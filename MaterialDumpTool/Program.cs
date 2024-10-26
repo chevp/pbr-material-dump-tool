@@ -15,6 +15,4 @@ for (int i = 0; i < args.Length - 1; i++)
     }
 }
 
-currDir = "C:/git-ws/pbr-materials-library/materials";
-
 PbrMaterialConversion.run(currDir);

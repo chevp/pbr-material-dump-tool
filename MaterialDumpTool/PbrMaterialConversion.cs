@@ -20,7 +20,7 @@ public static class PbrMaterialConversion
     /// <param name="dir">Working Directory</param>
     public static void run(String dir)
     {
-        createIfNotExist("_dump");
+        createIfNotExist(@$"{dir}\_dump");
 
         DirectoryInfo place = new DirectoryInfo(dir);
 
@@ -28,14 +28,14 @@ public static class PbrMaterialConversion
 
         foreach (DirectoryInfo i in Directories)
         {
-            if (i.Name.Equals("_dump"))
+            if (i.Name.Equals(@$"_dump"))
                 continue;
 
             Console.WriteLine($"dir={i.Name}");
 
             try
             {
-                createIfNotExist(@$"_dump\{i.Name}");
+                createIfNotExist(@$"{dir}\_dump\{i.Name}");
 
                 convertAllImagesInsideFolder(@$"{dir}\{i.Name}", $@"_dump\{i.Name}");
             }
@@ -46,6 +46,8 @@ public static class PbrMaterialConversion
                 Console.ReadKey();
             }
         }
+
+        Console.WriteLine("Finished!");
 
         Console.ReadKey();
     }
