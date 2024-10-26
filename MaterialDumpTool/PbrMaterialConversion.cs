@@ -3,6 +3,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
@@ -55,28 +56,35 @@ public static class PbrMaterialConversion
     /// </summary>
     /// <param name="srcDir">Quelldateipfad</param>
     /// <param name="dumpDir">Ausgabepfad für Dump-Dateien</param>
-    private static void convertAllImagesInsideFolder(String srcDir, String dumpDir)
+    private static void convertAllImagesInsideFolder(string srcDir, string dumpDir)
     {
+        // Check if the source directory contains images
         if (!printDirectoryContent(srcDir))
         {
             Console.WriteLine($"{srcDir} has no images");
             return;
         }
 
-        createIfNotExist(@$"{dumpDir}\2048x2048");
+        // Ensure destination folder exists
+        string targetDir = Path.Combine(dumpDir, "2048x2048");
+        createIfNotExist(targetDir);
 
+        // Copy images from source to dump directory if not present in source subdirectory
         if (!hasDirectoryImages(srcDir))
         {
-            copyAllImages(@$"{srcDir}\2048x2048", srcDir);
+            copyAllImages(Path.Combine(srcDir, "2048x2048"), srcDir);
         }
 
-        copyAllImages(srcDir, @$"{dumpDir}\2048x2048");
+        // Copy all images from source directory to target directory
+        copyAllImages(srcDir, targetDir);
 
-        normalizeAllImageNames(@$"{dumpDir}\2048x2048");
+        // Normalize all image file names in the target directory
+        normalizeAllImageNames(targetDir);
 
-        for (int i = 8; i <= 1024; i = i * 2)
+        // Process images at progressively lower resolutions
+        for (int resolution = 8; resolution <= 1024; resolution *= 2)
         {
-            processSingleFileFormat(dumpDir, i);
+            processSingleFileFormat(dumpDir, resolution);
         }
     }
 
@@ -119,27 +127,21 @@ public static class PbrMaterialConversion
     /// </summary>
     /// <param name="destDir">Zieldatei</param>
     /// <param name="delete">Dateilöschung, falls existiert</param>
-    private static void createIfNotExist(String destDir, Boolean delete = false)
+    private static void createIfNotExist(string destDir, bool delete = false)
     {
         try
         {
-            if (Directory.Exists(destDir) && delete)
+            if (delete && Directory.Exists(destDir))
             {
                 Directory.Delete(destDir, true);
             }
 
-            if (!Directory.Exists(destDir))
-            {
-                Directory.CreateDirectory(destDir);
-            }
+            Directory.CreateDirectory(destDir); // Safe to call even if directory already exists
         }
         catch (Exception e)
         {
-            Console.WriteLine("The process failed: {0}", e.ToString());
-
-            Console.ReadKey();
-
-            Environment.Exit(0);
+            Console.WriteLine($"The process failed: {e}");
+            Environment.Exit(0); // Exits without waiting for user input
         }
     }
 
@@ -172,23 +174,23 @@ public static class PbrMaterialConversion
     /// Gib true zurück, falls ein Ordner Bilder enthält.
     /// </summary>
     /// <param name="dir">Zu prüfender Ordnerinhalt</param>
-    private static bool hasDirectoryImages(String dir)
+    private static bool hasDirectoryImages(string dir)
     {
         Console.WriteLine("List of all Files:");
-        DirectoryInfo place = new DirectoryInfo(dir);
-        FileInfo[] Files = place.GetFiles();
-        bool hasImage = false;
+        DirectoryInfo directory = new DirectoryInfo(dir);
 
-        foreach (FileInfo i in Files)
+        foreach (FileInfo file in directory.GetFiles())
         {
-            if (i.Name.Contains("review"))
-                continue;
+            Console.WriteLine(file.Name); // Added to list files as per "List of all Files"
 
-            if (i.Name.EndsWith(".png"))
+            // Check if the file name does not contain "review" and ends with ".png"
+            if (!file.Name.Contains("review") && file.Name.EndsWith(".png"))
+            {
                 return true;
+            }
         }
 
-        return hasImage;
+        return false;
     }
 
     /// <summary>
@@ -276,29 +278,33 @@ public static class PbrMaterialConversion
     /// </summary>
     /// <param name="srcFilename">Quelldateiname</param>
     /// <returns>Normalisierter Dateiname</returns>
-    private static string normalizedFilename(String srcFilename)
+    private static string normalizedFilename(string srcFilename)
     {
         string name = srcFilename.ToLower();
 
-        if (name.EndsWith("roughnessmetalness.png"))
-            name = name.Replace("roughnessmetalness", "metalRoughness");
-        if (name.EndsWith("-ao.png"))
-            name = name.Replace("-ao.png", "_ao.png");
-        if (name.EndsWith("-albedo.png"))
-            name = name.Replace("-albedo.png", "_albedo.png");
-        if (name.EndsWith("-height.png"))
-            name = name.Replace("-height.png", "_height.png");
-        if (name.EndsWith("-normal-ogl.png"))
-            name = name.Replace("-normal-ogl.png", "_normal-ogl.png");
-        if (name.EndsWith("-normal.png"))
-            name = name.Replace("-normal.png", "_normal.png");
-        if (name.EndsWith("-metallic.png"))
-            name = name.Replace("-metallic.png", "_metallic.png");
-        if (name.EndsWith("-roughness.png"))
-            name = name.Replace("-roughness.png", "_roughness.png");
-        if (name.EndsWith("-metallic.png"))
-            name = name.Replace("-metallic.png", "_metallic.png");
+        // Define the suffix replacements in a dictionary
+        var replacements = new Dictionary<string, string>
+        {
+            { "roughnessmetalness.png", "metalRoughness.png" },
+            { "-ao.png", "_ao.png" },
+            { "-albedo.png", "_albedo.png" },
+            { "-height.png", "_height.png" },
+            { "-normal-ogl.png", "_normal-ogl.png" },
+            { "-normal.png", "_normal.png" },
+            { "-metallic.png", "_metallic.png" },
+            { "-roughness.png", "_roughness.png" }
+        };
 
+        // Apply replacements based on matching suffixes
+        foreach (var replacement in replacements)
+        {
+            if (name.EndsWith(replacement.Key))
+            {
+                name = name.Replace(replacement.Key, replacement.Value);
+            }
+        }
+
+        // Log changes if the filename was modified
         if (!srcFilename.Equals(name))
         {
             Console.WriteLine($"Filename changed old: {srcFilename} new: {name}");
