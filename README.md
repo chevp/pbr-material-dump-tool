@@ -1,6 +1,6 @@
 # PBR Material Dump Tool
 
-A CScharp program for converting PBR (Physically Based Rendering) materials into optimized dump files for faster loading in Vulkan rendering environments.
+A csharp program for converting PBR (Physically Based Rendering) materials into optimized dump files for faster loading in Vulkan rendering environments.
 
 ## Quick Start
 
