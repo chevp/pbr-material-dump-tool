@@ -1,0 +1,34 @@
+<mxfile host="65bd71144e">
+    <diagram id="AUvOTdAcRZt4RW0IC4vr" name="Page-1">
+        <mxGraphModel dx="2035" dy="496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="14" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="-890" y="67.75" width="590" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Material Dump Tool" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+                    <mxGeometry x="-691" y="80" width="130" height="33" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" style="edgeStyle=none;html=1;" edge="1" parent="1" source="7" target="2">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-595.8399999999999" y="53" as="sourcePoint"/>
+                        <mxPoint x="-670" y="22" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5" style="edgeStyle=none;html=1;" edge="1" parent="1" source="2" target="6">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-500" y="22" as="targetPoint"/>
+                        <mxPoint x="-720" y="97" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="6" value="PBR Material Dump Files 1...N" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fontSize=12;fillColor=none;size=18;" vertex="1" parent="1">
+                    <mxGeometry x="-530" y="82.5" width="210" height="30.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="PBR Material 1...N" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fontSize=12;fillColor=none;size=18;" vertex="1" parent="1">
+                    <mxGeometry x="-870" y="80" width="150" height="31.5" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
