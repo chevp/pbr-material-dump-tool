@@ -29,9 +29,9 @@ Before using the tool, download the required PBR materials for conversion.
 | **Material Name** | **Example Filename**          |
 |-------------------|-------------------------------|
 | Albedo            | `pbrmat1_albedo.png`          |
-| Ambient Occlusion  | `pbrmat1_ao.png`              |
+| Ambient Occlusion | `pbrmat1_ao.png`              |
 | Height            | `pbrmat1_height.png`          |
-| Normal (OpenGL)    | `pbrmat1_normal-ogl.png`      |
+| Normal (OpenGL)   | `pbrmat1_normal-ogl.png`      |
 | Preview           | `pbrmat1_preview.png`         |
 | Roughness         | `pbrmat1_roughness.png`       |
 

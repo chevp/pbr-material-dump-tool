@@ -4,3 +4,4 @@
 */input
 */Properties
 *.csproj.user
+.claude/
