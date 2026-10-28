@@ -5,9 +5,9 @@
 Das **PBR Material Dump Tool** ist eine C#-Konsolenanwendung zur effizienten Konvertierung hochauflösender PBR (Physically Based Rendering) Materialien in optimierte, skalierte Versionen. Das Tool wurde entwickelt, um die Performance von Vulkan-Rendering-Umgebungen durch schnellere Material-Ladezeiten zu verbessern.
 
 ### Technischer Stack
-- **.NET 6.0** - Zielframework
+- **.NET 8.0** - Zielframework
 - **C#** - Programmiersprache  
-- **SixLabors.ImageSharp 3.1.5** - Bildverarbeitung
+- **SixLabors.ImageSharp 4.1.3** - Bildverarbeitung
 - **Windows x64** - Zielplattform
 - **Self-contained Single-File Deployment**
 
@@ -159,7 +159,7 @@ public class PbrMaterialConversionTests
 ```xml
 <PropertyGroup>
   <OutputType>Exe</OutputType>
-  <TargetFramework>net6.0</TargetFramework>
+  <TargetFramework>net8.0</TargetFramework>
   <PublishSingleFile>true</PublishSingleFile>
   <SelfContained>true</SelfContained>
   <RuntimeIdentifier>win-x64</RuntimeIdentifier>
