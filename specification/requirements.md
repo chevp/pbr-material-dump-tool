@@ -132,7 +132,7 @@ _dump/
 ### 4.4 Portabilität
 **REQ-017**: Das System MUSS als Single-File-Executable verfügbar sein
 - Self-contained Deployment
-- Target: Windows x64 (.NET 6.0)
+- Target: Windows x64 (.NET 8.0)
 
 ### 4.5 Sicherheit
 **REQ-018**: Das System DARF KEINE sensiblen Daten protokollieren
@@ -147,9 +147,9 @@ _dump/
 ## 5. Systembeschränkungen
 
 ### 5.1 Technische Beschränkungen
-- **.NET 6.0** Framework erforderlich
+- **.NET 8.0** Framework erforderlich
 - **Windows x64** Zielplattform
-- **ImageSharp 3.1.5** für Bildverarbeitung
+- **ImageSharp 4.1.3** für Bildverarbeitung
 - **PNG-Format** ausschließlich unterstützt
 
 ### 5.2 Betriebsumgebung

@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Build
+        run: dotnet build MaterialDumpTool.sln -c Release
+
+      - name: Publish single-file executable
+        run: dotnet publish material-dump-tool/MaterialDumpTool.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o publish
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: MaterialDumpTool-win-x64
+          path: publish/MaterialDumpTool.exe

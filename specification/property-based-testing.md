@@ -12,7 +12,7 @@ Das Tool **funktioniert bereits stabil**. Property-Based Testing sollte nur für
 // MaterialDumpTool.Tests.csproj
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -208,7 +208,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '6.0'
+          dotnet-version: '8.0.x'
       
       - name: Run Property-Based Tests
         run: |

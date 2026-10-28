@@ -66,6 +66,8 @@ MaterialDumpTool.exe
 
 ## Entwicklung und Build
 
+Voraussetzung: **.NET 8 SDK** (Version über `global.json` festgelegt). Die CI baut mit `.github/workflows/build.yml`.
+
 ### Lokale Entwicklung
 ```bash
 # Projekt kompilieren
